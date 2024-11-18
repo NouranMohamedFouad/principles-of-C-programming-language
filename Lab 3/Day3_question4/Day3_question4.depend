@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1731967629 source:e:\iti\c programming language\labs\day3_question4\main.c
+	<windows.h>
+	<io.h>
+	<unistd.h>
+	<stdlib.h>
+	<stdio.h>
+
