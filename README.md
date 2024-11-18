@@ -1,2 +1,2 @@
-# This is the lab for the second day
-## consists of 5 Questions 
+# These are the labs for C Programming Language Course
+## consists of 5-7 labs 
