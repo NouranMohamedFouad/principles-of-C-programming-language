@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1732113779 source:e:\iti\c programming language\content\day5_question1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"builtInFunctions.h"
+
+1732107903 e:\iti\c programming language\content\day5_question1\builtinfunctions.h
+

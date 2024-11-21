@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1732225023 source:e:\iti\c programming language\content\day5_question2\main.c
+	<windows.h>
+	<io.h>
+	<unistd.h>
+	<stdlib.h>
+	<stdio.h>
+
