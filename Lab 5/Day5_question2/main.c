@@ -46,6 +46,11 @@ typedef struct Employee{
 	int salary;
 }Employee;
 
+int intEnterEmployee(Employee [],int,int);
+
+void voidModifyEmployee(Employee []);
+void voidDeleteEmployee(Employee []);
+
 int main(void)
 {
     Employee employees[EMPLOYEESIZE]={0};
@@ -54,16 +59,17 @@ int main(void)
     gotoxy(col*55,row*10);
     setTextColor(stdout,14); // Light BROWN color as a default
     printf("New");
-    gotoxy(col*55,(row*10)+5);
+    gotoxy(col*55,(row*10)+4); //5
     setTextColor(stdout,6); // Light BROWN color as a default
     printf("Display");
-    gotoxy(col*55,(row*10)+10);
+    gotoxy(col*55,(row*10)+8); //9
     printf("Modify");
-    gotoxy(col*55,(row*10)+15);
+    gotoxy(col*55,(row*10)+12); //13
+    printf("Delete");
+    gotoxy(col*55,(row*10)+16); //17
     printf("Exit");
     row=1;
     gotoxy(col*55,row*10);
-
 
     while(flag){
         char click = 0;
@@ -75,22 +81,22 @@ int main(void)
             {
                 if(row==1) //first row
                 {
-                    row=16;
+                    row=17;
                 }
-                else {
-                    row-=5;  // Move up
+                else
+                {
+                    row-=4;  // Move up
                 }
-
             }
             else if(click==80) // down
             {
-                if(row==16)
+                if(row==17)
                 {
                     row=1;
                 }
                 else
                 {
-                    row+=5;
+                    row+=4;
                 }
 
             }
@@ -100,9 +106,8 @@ int main(void)
             }
             else if(click==79) // end button
             {
-                row=16;  //will go to exit
+                row=17;  //will go to exit
             }
-
             //going to the place i chose (up 2w down)
             if(row==1)
             {
@@ -113,12 +118,14 @@ int main(void)
                 setTextColor(stdout,6);
                 gotoxy(55,15);
                 printf("Display");
-                gotoxy(55,20);
+                gotoxy(55,19);
                 printf("Modify");
-                gotoxy(55,25);
+                gotoxy(55,23);
+                printf("Delete");
+                gotoxy(55,27);
                 printf("Exit");
             }
-            else if(row==6)
+            else if(row==5)
             {
                 system("cls");
                 setTextColor(stdout,6);
@@ -128,12 +135,14 @@ int main(void)
                 gotoxy(55,15);
                 printf("Display");
                 setTextColor(stdout,6);
-                gotoxy(55,20);
+                gotoxy(55,19);
                 printf("Modify");
-                gotoxy(55,25);
+                gotoxy(55,23);
+                printf("Delete");
+                gotoxy(55,27);
                 printf("Exit");
             }
-            else if(row==11)
+            else if(row==9)
             {
                 setTextColor(stdout,6);
                 system("cls");
@@ -143,10 +152,29 @@ int main(void)
                 gotoxy(55,15);
                 printf("Display");
                 setTextColor(stdout,14);
-                gotoxy(55,20);
+                gotoxy(55,19);
                 printf("Modify");
                 setTextColor(stdout,6);
-                gotoxy(55,25);
+                gotoxy(55,23);
+                printf("Delete");
+                gotoxy(55,27);
+                printf("Exit");
+            }
+            else if(row==13){
+                setTextColor(stdout,6);
+                system("cls");
+                gotoxy(55,10);
+                printf("New");
+                setTextColor(stdout,6);
+                gotoxy(55,15);
+                printf("Display");
+                gotoxy(55,19);
+                printf("Modify");
+                setTextColor(stdout,14);
+                gotoxy(55,23);
+                printf("Delete");
+                setTextColor(stdout,6);
+                gotoxy(55,27);
                 printf("Exit");
             }
             else
@@ -159,10 +187,12 @@ int main(void)
                 gotoxy(55,15);
                 printf("Display");
                 setTextColor(stdout,6);
-                gotoxy(55,20);
+                gotoxy(55,19);
                 printf("Modify");
+                gotoxy(55,23);
+                printf("Delete");
                 setTextColor(stdout,14);
-                gotoxy(55,25);
+                gotoxy(55,27);
                 printf("Exit");
             }
         }
@@ -170,7 +200,7 @@ int main(void)
         {
             system("cls");
             setTextColor(stdout,6);
-            if (row==1)
+            if (row==1)  // new button
             {
                 gotoxy(col*55,1);
 
@@ -179,7 +209,7 @@ int main(void)
                 scanf("%d",&sizee);
                 employeesCreated=intEnterEmployee(employees,sizee,employeesCreated);
             }
-            else if(row==6)
+            else if(row==5) // Display button
             {
                 gotoxy(col*45,1);
                 if(employeesCreated==0){
@@ -194,24 +224,45 @@ int main(void)
                     printf("number %d) Employee's salary:%d \n",j+1,employees[j].salary);
                 }
             }
-            else if(row==11)
+            else if(row==9) // Modify button
             {
-                 gotoxy(col*45,1);
+                gotoxy(col*45,1);
                 if(employeesCreated==0){
                     setTextColor(stdout,4);
                     printf("\nCannot Modify Cause there is no employees right now!\n");
                     setTextColor(stdout,6);
                 }
-                for(int j=0;j<employeesCreated;j++)
-                {
-                    printf("\nnumber %d) Employee's name:%s \n",j+1,employees[j].name);
-                    printf("number %d) Employee's code:%d \n",j+1,employees[j].code);
-                    printf("number %d) Employee's salary:%d \n",j+1,employees[j].salary);
+                else{
+                    for(int j=0;j<employeesCreated;j++)
+                    {
+                        printf("\nnumber %d) Employee's name:%s \n",j+1,employees[j].name);
+                        printf("number %d) Employee's code:%d \n",j+1,employees[j].code);
+                        printf("number %d) Employee's salary:%d \n",j+1,employees[j].salary);
+                    }
+                    voidModifyEmployee(employees);
                 }
-                voidModifyEmployee(employees);
-
             }
-            else
+            else if(row==13) // Delete button
+            {
+                gotoxy(col*45,1);
+                if(employeesCreated==0){
+                    setTextColor(stdout,4);
+                    printf("\nCannot delete Cause there is no employees right now!\n");
+                    setTextColor(stdout,6);
+                }
+                else{
+                    for(int j=0;j<employeesCreated;j++)
+                    {
+                        printf("\nnumber %d) Employee's name:%s \n",j+1,employees[j].name);
+                        printf("number %d) Employee's code:%d \n",j+1,employees[j].code);
+                        printf("number %d) Employee's salary:%d \n",j+1,employees[j].salary);
+                    }
+                    printf("\n employeesCreated before: %d \n",employeesCreated);
+                    employeesCreated=intDeleteEmployee(employees,employeesCreated);
+                    printf("\n employeesCreated after %d \n",employeesCreated);
+                }
+            }
+            else //Exit button
             {
                 gotoxy(col*45,10);
                 setTextColor(stdout,11);
@@ -221,16 +272,20 @@ int main(void)
                 exit(0);
             }
             char click=getch();
-            if (click==83) //delete button
+            if (click==83) //delete button on keyboard
             {
                 system("cls");
                 row =1,col =1;
                 gotoxy(col*55,row*10);
                 setTextColor(stdout,6);
                 printf("New");
-                gotoxy(col*55,(row*10)+5);
+                gotoxy(col*55,(row*10)+4); //5
                 printf("Display");
-                gotoxy(col*55,(row*10)+10);
+                gotoxy(col*55,(row*10)+8); //9
+                printf("Modify");
+                gotoxy(col*55,(row*10)+12); //13
+                printf("Delete");
+                gotoxy(col*55,(row*10)+16); //17
                 printf("Exit");
                 row=1;
                 gotoxy(col*55,row*10);
@@ -445,6 +500,80 @@ void voidModifyEmployee(Employee e[])
         counter++;
     }
 }
+
+int intDeleteEmployee(Employee e[],int employeesCreated )
+{
+    int flag=1;
+    char counter=0,check;
+    while(flag)
+    {
+        int intSalaryChecker=1,intCodeChecker=1;
+        char choice=0;
+
+        int id=0;
+        printf("\nplease enter the code of the Employee you want to delete: ");
+        while(intCodeChecker)
+        {
+            int num=0;
+            if((scanf("%d%c", &num,&check)==2 && check=='\n'))
+            {
+                if(num<=0){
+                        printf("\nplease enter a positive number of code: ");
+                        fflush(stdin);
+                }
+                else{
+                    int isFound=0;
+                    for(int j=0;j<EMPLOYEESIZE && !isFound ;j++){
+                        if(e[j].code==num){
+                            isFound=1;
+                            id=j;
+                        }
+                    }
+                    if(isFound)
+                    {
+                        intCodeChecker=0;
+                    }
+                    else{
+                        printf("\ncode is not present please enter a valid code: ");
+                        fflush(stdin);
+                    }
+                }
+            }
+            else
+            {
+                printf("\nplease enter only numbers for code: ");
+                fflush(stdin);
+            }
+        }
+
+
+        for(int j=id;j<EMPLOYEESIZE;j++)
+        {
+            e[j]=e[j+1];
+        }
+        employeesCreated--;
+        printf("\npress y to continue or n to exit: ");
+        scanf(" %c", &choice);
+        while(choice!='y' && choice!='Y' && choice!='n' && choice!='N')
+        {
+            setTextColor(stdout,4);
+            printf("\nplease press only  y or n: ");
+            scanf(" %c", &choice);
+        }
+        setTextColor(stdout,6);
+
+        if( choice=='N' || choice=='n'){
+            setTextColor(stdout,2);
+            printf("\nyou deleted %d employees successfully ",counter+1);
+            flag=0;
+            setTextColor(stdout,6);
+        }
+        counter++;
+    }
+    return employeesCreated;
+}
+
+
 
 
 #ifdef _WIN32
